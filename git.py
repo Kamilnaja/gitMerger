@@ -9,13 +9,17 @@ def utf8Decode(input):
     return input.decode('utf-8')
 
 
+def checkout():
+    print(ok)
+    co = subprocess.check_output(["git", "checkout", branchToCheckout])
+    status = subprocess.check_output(["git", "status"])
+    print(status)
+
+
 try:
     output = subprocess.check_output(["git", "pull", "--rebase"])
     if ok in utf8Decode(output):
-        print(ok)
-        co = subprocess.check_output(["git", "checkout", branchToCheckout])
-        status = subprocess.check_output(["git", "status"])
-    print(status)
+        checkout()
 except subprocess.CalledProcessError as e:
     print(e.output)
     pull = subprocess.check_output(["git", "commit", "-am", "wip"])
