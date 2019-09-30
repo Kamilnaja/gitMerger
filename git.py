@@ -16,16 +16,33 @@ def checkout():
     print(status)
 
 
-try:
-    output = subprocess.check_output(["git", "pull", "--rebase"])
-    if ok in utf8Decode(output):
-        checkout()
-except subprocess.CalledProcessError as e:
-    print(e.output)
-    pull = subprocess.check_output(["git", "commit", "-am", "wip"])
-    print("stashing changes")
+def stash():
+    stash = subprocess.check_output(["git", "stash"])
+    print(stash)
+    print("stashing changes success")
 
-# elif cannotPull in utf8Decode(output):
-#   print('Need stash or commit')
-# else:
-#   print(utf8Decode(output))
+
+def amend():
+    amend = subprocess.check_output(["git", "commit", "--amend", "--no-edit"])
+    print(amend)
+    print("amend successfull")
+
+
+def askForAction():
+    print("Do you want [s]tash or [a]mend your changes?")
+    action = input()
+    if action == "s":
+        stash()
+    elif action == "a":
+        amend()
+
+def doGitActions():
+  try:
+      output = subprocess.check_output(["git", "pull", "--rebase"])
+      if ok in utf8Decode(output):
+          checkout()
+  except subprocess.CalledProcessError as e:
+      print(e.output)
+      askForAction()
+
+doGitActions()
