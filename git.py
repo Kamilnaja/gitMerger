@@ -10,10 +10,21 @@ def utf8Decode(input):
 
 
 def checkout():
+<<<<<<< HEAD
     print(ok)
     co = subprocess.check_output(["git", "checkout", branchToCheckout])
     status = subprocess.check_output(["git", "status"])
     print(status)
+=======
+    print('starting checkout')
+    try:
+      co = subprocess.check_output(["git", "checkout", branchToCheckout])
+      status = subprocess.check_output(["git", "status"])
+      print(status)
+    except subprocess.CalledProcessError as e:
+        print(e)
+
+>>>>>>> 0000
 
 
 def stash():
@@ -44,5 +55,9 @@ def doGitActions():
   except subprocess.CalledProcessError as e:
       print(e.output)
       askForAction()
+<<<<<<< HEAD
+=======
+      checkout()
+>>>>>>> 0000
 
 doGitActions()
