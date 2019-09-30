@@ -11,14 +11,13 @@ try:
     output = subprocess.check_output(["git", "pull", "--rebase"])
 except subprocess.CalledProcessError as e:
   print(e.output)
-  pull = subprocess.check_output(["git", "stash"])
+  pull = subprocess.check_output(["git", "commit" " -am", "wip"])
   print("stashing changes")
-  # if cannotPull in utf8Decode(e.output):
 
-# if ok in utf8Decode(output):
-#   print(ok)
-#   co = subprocess.check_output(["git", branchToCheckout])
-
+if ok in utf8Decode(output):
+  print(ok)
+  co = subprocess.check_output(["git", "checkout", branchToCheckout])
+  status = subprocess.check_output(["git", "status"])
 # elif cannotPull in utf8Decode(output):
 #   print('Need stash or commit')
 # else:
